@@ -1,0 +1,10 @@
+Java is:
+1. Simple.
+2. Object Oriented.
+3. Robust.
+4. Secure.
+5. Platform Independent
+6. Portable
+7. Dynamic
+8. Interpreted
+9. Multithreaded
