@@ -59,6 +59,9 @@ class Form extends JFrame implements ActionListener {
         add(panel);
         register.addActionListener(this);
         login.addActionListener(this);
+
+        this.setVisible(true);
+        this.setSize(800,400);
     }
 
     public void initiateLoginForm(JPanel panel) {
@@ -109,11 +112,11 @@ class Form extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String action = ae.getActionCommand();
 
-        String name = uname_txt.getText();
         String pwd = pwd_txt.getText();
         String email = email_txt.getText();
 
-        if(action.equals(register.getLabel())) {
+        if(action.equals(registerLabel)) {
+            String name = uname_txt.getText();
             if(Validator.checkEmail(email)
                     && !Validator.userExists(name)
                     && !Validator.emailExists(email)
@@ -122,17 +125,19 @@ class Form extends JFrame implements ActionListener {
                 showSuccess();
             else showError();
 
-        } else if(action.equals(login.getLabel())) {
-            if(Validator.verifyUserCred(email, pwd))
-                showSuccess();
-            else showError();
-
         } else {
-            new Form(
-                    action.equals(registerLabelAlt) ? registerLabel : loginLabel
-            ).setVisible(true);
-            this.dispose();
-
+            if (action.equals(loginLabel)) {
+                if (Validator.verifyUserCred(email, pwd))
+                    showSuccess();
+                else showError();
+            } else {
+                Form form = new Form(
+                        action.equals(registerLabelAlt) ? registerLabel : loginLabel
+                );
+                form.setVisible(true);
+                form.setSize(800,400);
+                this.dispose();
+            }
         }
     }
 }
