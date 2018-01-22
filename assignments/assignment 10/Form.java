@@ -117,7 +117,7 @@ class Form extends JFrame implements ActionListener {
 
         if(action.equals(registerLabel)) {
             String name = uname_txt.getText();
-            if(Validator.checkEmail(email)
+            if(Validator.validateEmail(email)
                     && !Validator.userExists(name)
                     && !Validator.emailExists(email)
                     && Validator.validatePassword(pwd)
