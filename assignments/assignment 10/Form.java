@@ -7,7 +7,7 @@ class Form extends JFrame implements ActionListener {
     JTextField uname_txt, email_txt;
     JPasswordField pwd_txt;
     JButton register, login;
-    String registerLabel = "Register",
+    static String registerLabel = "Register",
             loginLabel = "Login",
             registerLabelAlt = "Take me to sign up",
             loginLabelAlt = "Take me to sign in",
@@ -19,7 +19,7 @@ class Form extends JFrame implements ActionListener {
         super(title);
         setLayout(new FlowLayout());
 
-        if(title.equals(reg))
+        if(title.equals(registerLabel))
             initiateRegisterForm(
                     new JPanel(
                             new GridLayout(4, 2, 10, 20)
@@ -32,7 +32,7 @@ class Form extends JFrame implements ActionListener {
                 )
         );
 
-        setDefaultCloseOperation(this.Exit_ON_CLOSE);
+        setDefaultCloseOperation(this.EXIT_ON_CLOSE);
     }
 
     public void initiateRegisterForm(JPanel panel) {
@@ -45,7 +45,7 @@ class Form extends JFrame implements ActionListener {
         email_txt = new JTextField(30);
 
         register = new JButton(registerLabel);
-        login = new JButton(loginLabelAltAlt);
+        login = new JButton(loginLabelAlt);
 
         panel.add(uname);
         panel.add(uname_txt);
@@ -71,7 +71,7 @@ class Form extends JFrame implements ActionListener {
         pwd_txt = new JPasswordField(20);
         email_txt = new JTextField(30);
 
-        register = new JButton(registerLabelAltAlt);
+        register = new JButton(registerLabelAlt);
         login = new JButton(loginLabel);
 
         //panel.add(uname);
@@ -92,7 +92,7 @@ class Form extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(
                 this,
                 "Successful",
-                "Smile..."
+                "Smile...",
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
@@ -108,11 +108,12 @@ class Form extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         String action = ae.getActionCommand();
-        if(action.equals(register.getLabel())) {
-            String name = uname_txt.getText();
-            String pwd = pwd_txt.getText();
-            String email = email_txt.getText();
 
+        String name = uname_txt.getText();
+        String pwd = pwd_txt.getText();
+        String email = email_txt.getText();
+
+        if(action.equals(register.getLabel())) {
             if(Validator.checkEmail(email)
                     && !Validator.userExists(name)
                     && !Validator.emailExists(email)
