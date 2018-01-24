@@ -25,5 +25,7 @@
 hs_err_pid*
 
 .idea/
+driver/
+
 
 # End of https://www.gitignore.io/api/java
