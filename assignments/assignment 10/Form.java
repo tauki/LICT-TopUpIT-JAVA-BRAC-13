@@ -7,19 +7,20 @@ class Form extends JFrame implements ActionListener {
     JTextField uname_txt, email_txt;
     JPasswordField pwd_txt;
     JButton register, login;
-    static String registerLabel = "Register",
-            loginLabel = "Login",
-            registerLabelAlt = "Take me to sign up",
-            loginLabelAlt = "Take me to sign in",
-            usernameLabel = "Username",
-            passwordLabel = "Password",
-            emailLabel = "Email";
+    static final String 
+        LABEL_REGISTER =        "Register",
+        LABEL_REGISTER_ALT =    "Take me to sign up",
+        LABEL_LOGIN =           "Login",
+        LABEL_LOGIN_ALT =       "Take me to sign in",
+        LABEL_USERNAME =        "Username",
+        LABEL_PASSWORD =        "Password",
+        LABEL_EMAIL =           "Email";
 
     public Form(String title){
         super(title);
         setLayout(new FlowLayout());
 
-        if(title.equals(registerLabel))
+        if(title.equals(LABEL_REGISTER))
             initiateRegisterForm(
                     new JPanel(
                             new GridLayout(4, 2, 10, 20)
@@ -36,16 +37,16 @@ class Form extends JFrame implements ActionListener {
     }
 
     public void initiateRegisterForm(JPanel panel) {
-        uname = new JLabel(usernameLabel);
-        pwd = new JLabel(passwordLabel);
-        email = new JLabel(emailLabel);
+        uname = new JLabel(LABEL_USERNAME);
+        pwd = new JLabel(LABEL_PASSWORD);
+        email = new JLabel(LABEL_EMAIL);
 
         uname_txt = new JTextField(10);
         pwd_txt = new JPasswordField(20);
         email_txt = new JTextField(30);
 
-        register = new JButton(registerLabel);
-        login = new JButton(loginLabelAlt);
+        register = new JButton(LABEL_REGISTER);
+        login = new JButton(LABEL_LOGIN_ALT);
 
         panel.add(uname);
         panel.add(uname_txt);
@@ -67,15 +68,15 @@ class Form extends JFrame implements ActionListener {
     public void initiateLoginForm(JPanel panel) {
         // currently accepting only email and pass
         // uname = new JLabel("User Name");
-        pwd = new JLabel(passwordLabel);
-        email = new JLabel(emailLabel);
+        pwd = new JLabel(LABEL_PASSWORD);
+        email = new JLabel(LABEL_EMAIL);
 
         //uname_txt = new JTextField(10);
         pwd_txt = new JPasswordField(20);
         email_txt = new JTextField(30);
 
-        register = new JButton(registerLabelAlt);
-        login = new JButton(loginLabel);
+        register = new JButton(LABEL_REGISTER_ALT);
+        login = new JButton(LABEL_LOGIN);
 
         //panel.add(uname);
         //panel.add(uname_txt);
@@ -115,7 +116,7 @@ class Form extends JFrame implements ActionListener {
         String pwd = pwd_txt.getText();
         String email = email_txt.getText();
 
-        if(action.equals(registerLabel)) {
+        if(action.equals(LABEL_REGISTER)) {
             String name = uname_txt.getText();
             if(Validator.validateEmail(email)
                     && !Validator.userExists(name)
@@ -126,13 +127,13 @@ class Form extends JFrame implements ActionListener {
             else showError();
 
         } else {
-            if (action.equals(loginLabel)) {
+            if (action.equals(LABEL_LOGIN)) {
                 if (Validator.verifyUserCred(email, pwd))
                     showSuccess();
                 else showError();
             } else {
                 Form form = new Form(
-                        action.equals(registerLabelAlt) ? registerLabel : loginLabel
+                        action.equals(LABEL_REGISTER_ALT) ? LABEL_REGISTER : LABEL_LOGIN
                 );
                 form.setVisible(true);
                 form.setSize(800,400);
